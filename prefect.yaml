@@ -74,9 +74,26 @@ deployments:
   schedule:
 - name: dep-sub-deployments
   version:
-  tags: []
+  tags:
+  - parent
+  - sub-deployments
+  - sub-dep-repro
   description: description
   entrypoint: sub_deployments.py:sub_deployments
+  parameters: {}
+  work_pool:
+    name: local-docker
+    work_queue_name:
+    job_variables: {}
+  schedule:
+- name: dep-task-wrapped
+  version:
+  tags:
+  - parent
+  - task-wrapped
+  - sub-dep-repro
+  description:
+  entrypoint: task_wrapped_deployments.py:task_wrapped_deployments
   parameters: {}
   work_pool:
     name: local-docker

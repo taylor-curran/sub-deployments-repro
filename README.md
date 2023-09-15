@@ -21,6 +21,9 @@ aws sso login
 
 prefect work-pool create local-docker --type docker
 
+In the work pool, specify the image as:
+`taycurran/test-projects-june11:3.3`
+
 Reminder: Make sure you have a docker desktop running
 
 prefect worker start --pool "local-docker"
