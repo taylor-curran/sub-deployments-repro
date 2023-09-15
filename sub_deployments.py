@@ -1,5 +1,5 @@
 from prefect import flow
-# from prefect_aws.s3 import S3Bucket
+from prefect_aws.s3 import S3Bucket
 import time
 from tasks_subflows_models.child_flows_sync import (  # could import from either child_flows_async or child_flows_sync
     child_flow_a,
@@ -22,7 +22,7 @@ from prefect.deployments import run_deployment
 @flow(
     task_runner=ConcurrentTaskRunner(),
     persist_result=True,
-    # result_storage=S3Bucket.load("result-storage"),
+    result_storage=S3Bucket.load("result-storage"),
 )
 def sub_deployments(sim_failure: SimulatedFailure = None, sleep_time_subflows: int = 0):
     """
