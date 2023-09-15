@@ -71,7 +71,7 @@ def child_flow_d(sleep_time=0):
 
 
 # -- Nested Child Flow --
-@flow(persist_result=True, result_storage=S3Bucket.load("result-storage"))
+@flow(persist_result=True,) #result_storage=S3Bucket.load("result-storage"))
 def child_flow_c(sleep_time=0):
     d = child_flow_d(sleep_time=sleep_time)
     m = task_m.submit()
