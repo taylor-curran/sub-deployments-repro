@@ -100,3 +100,33 @@ deployments:
     work_queue_name:
     job_variables: {}
   schedule:
+- name: dep-just-tasks
+  version:
+  tags:
+  - parent
+  - just-tasks
+  - control
+  - sub-dep-repro
+  description:
+  entrypoint: control_just_tasks_concurrent.py:control_just_tasks_concurrent
+  parameters: {}
+  work_pool:
+    name: local-docker
+    work_queue_name:
+    job_variables: {}
+  schedule:
+- name: dep-normal-subflows
+  version:
+  tags:
+  - parent
+  - normal-subflows
+  - control
+  - sub-dep-repro
+  description:
+  entrypoint: control_normal_subflows.py:control_normal_subflows
+  parameters: {}
+  work_pool:
+    name: local-docker
+    work_queue_name:
+    job_variables: {}
+  schedule:

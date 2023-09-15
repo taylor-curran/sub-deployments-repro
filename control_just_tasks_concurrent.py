@@ -50,7 +50,7 @@ def task_c():
     persist_result=True,
     result_storage=S3Bucket.load("result-storage"),
 )
-def just_tasks_concurrent(
+def control_just_tasks_concurrent(
     sim_failure: SimulatedFailure = SimulatedFailure(), sleep_time_subflows: int = 0
 ):
     h = upstream_task_h.submit()
@@ -70,7 +70,7 @@ def just_tasks_concurrent(
 # ---
 
 if __name__ == "__main__":
-    just_tasks_concurrent(
+    control_just_tasks_concurrent(
         sim_failure=SimulatedFailure(
             child_flow_a=False, child_flow_b=False, downstream_task_j=False
         )
