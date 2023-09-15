@@ -7,10 +7,10 @@ name: sub-deployments-repro
 prefect-version: 2.13.1
 
 # build section allows you to manage and build docker images
-build: null
+build:
 
 # push section allows you to manage if and how this project is uploaded to remote locations
-push: null
+push:
 
 # pull section allows you to provide instructions for cloning this project in remote locations
 pull:
@@ -21,54 +21,65 @@ pull:
 # the deployments section allows you to provide configuration for deploying flows
 deployments:
 - name: a-local-docker
-  version: null
+  version:
   tags:
   - child
   - sub-dep-repro
-  description: null
+  description:
   entrypoint: tasks_subflows_models/child_flows_sync.py:child_flow_a
   parameters: {}
   work_pool:
     name: local-docker
-    work_queue_name: null
+    work_queue_name:
     job_variables: {}
-  schedule: null
+  schedule:
 - name: b-local-docker
-  version: null
+  version:
   tags:
   - child
   - sub-dep-repro
-  description: null
+  description:
   entrypoint: tasks_subflows_models/child_flows_sync.py:child_flow_b
   parameters: {}
   work_pool:
     name: local-docker
-    work_queue_name: null
+    work_queue_name:
     job_variables: {}
-  schedule: null
+  schedule:
 - name: c-local-docker
-  version: null
+  version:
   tags:
   - child
   - sub-dep-repro
-  description: null
+  description:
   entrypoint: tasks_subflows_models/child_flows_sync.py:child_flow_c
   parameters: {}
   work_pool:
     name: local-docker
-    work_queue_name: null
+    work_queue_name:
     job_variables: {}
-  schedule: null
+  schedule:
 - name: d-local-docker
-  version: null
+  version:
   tags:
   - child
   - sub-dep-repro
-  description: null
+  description:
   entrypoint: tasks_subflows_models/child_flows_sync.py:child_flow_d
   parameters: {}
   work_pool:
     name: local-docker
-    work_queue_name: null
+    work_queue_name:
     job_variables: {}
-  schedule: null
+  schedule:
+- name: dep-sub-deployments
+  version:
+  tags: []
+  description: description
+  entrypoint: sub_deployments.py:sub_deployments
+  parameters: {}
+  work_pool:
+    name: local-docker
+    work_queue_name:
+    job_variables: {}
+  schedule:
