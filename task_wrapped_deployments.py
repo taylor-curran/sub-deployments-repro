@@ -62,7 +62,6 @@ def task_wrapped_deployments(
     sim_failure: SimulatedFailure = SimulatedFailure(), sleep_time_subflows: int = 0
 ):
     h = upstream_task_h.submit()
-    time.sleep(15)
     i = upstream_task_i.submit()
     p = downstream_task_p.submit(h)
     a = wrapper_task_a.submit(
@@ -74,7 +73,7 @@ def task_wrapped_deployments(
         sleep_time=sleep_time_subflows,
         wait_for=[i],
     )
-    c = wrapper_task_c.submit(sleep_time=sleep_time_subflows)
+    c = wrapper_task_c.submit(sleep_time=sleep_time_subflows, wait_for=[b])
     j = downstream_task_j.submit(a, c, sim_failure.downstream_task_j)
     k = downstream_task_k.submit(wait_for=[b])
     time.sleep(sleep_time_subflows)
