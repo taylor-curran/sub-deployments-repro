@@ -16,9 +16,9 @@ import time
 
 
 @task
-def task_a(i, sim_failure_child_flow_a):
+def task_a(i, sim_failure_child_flow_a, sleep_time=3):
     print(f"i: {i}")
-    time.sleep(3)
+    time.sleep(sleep_time)
     if sim_failure_child_flow_a:
         raise Exception("This is a test exception")
     else:
@@ -26,9 +26,9 @@ def task_a(i, sim_failure_child_flow_a):
 
 
 @task
-def task_b(i={"i": "upstream task"}, sim_failure_child_flow_b=False):
+def task_b(i={"i": "upstream task"}, sim_failure_child_flow_b=False, sleep_time=3):
     print(f"i: {i}")
-    time.sleep(3)
+    time.sleep(sleep_time)
     if sim_failure_child_flow_b:
         raise Exception("This is a test exception")
     else:
@@ -36,8 +36,8 @@ def task_b(i={"i": "upstream task"}, sim_failure_child_flow_b=False):
 
 
 @task
-def task_c():
-    time.sleep(3)
+def task_c(sleep_time=3):
+    time.sleep(sleep_time)
     d = "child_flow_d"
     return {"c": d}
 
@@ -56,10 +56,10 @@ def control_just_tasks_concurrent(
     h = upstream_task_h.submit()
     i = upstream_task_i.submit()
     p = downstream_task_p.submit(h)
-    a = task_a.submit(i, sim_failure.child_flow_a)
+    a = task_a.submit(i, sim_failure.child_flow_a, sleep_time=sleep_time_subflows)
     f = mid_subflow_upstream_task_f.submit()
-    b = task_b.submit(sim_failure_child_flow_b=sim_failure.child_flow_b, wait_for=[i])
-    c = task_c.submit()
+    b = task_b.submit(sim_failure_child_flow_b=sim_failure.child_flow_b, sleep_time=sleep_time_subflows, wait_for=[i])
+    c = task_c.submit(sleep_time=sleep_time_subflows)
     j = downstream_task_j.submit(a, c, sim_failure.downstream_task_j)
     k = downstream_task_k.submit(wait_for=[b])
     time.sleep(sleep_time_subflows)

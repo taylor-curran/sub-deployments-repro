@@ -28,3 +28,9 @@ Reminder: Make sure you have a docker desktop running
 
 prefect worker start --pool "local-docker"
 
+prefect deploy --all
+
+prefect deployment run 'sub-deployments/dep-sub-deployments' --param sleep_time_subflows=20
+
+prefect deployment run 'task-wrapped-deployments/dep-task-wrapped' --param sleep_time_subflows=5
+
