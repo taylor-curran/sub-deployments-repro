@@ -130,3 +130,14 @@ deployments:
     work_queue_name:
     job_variables: {}
   schedule:
+- name: test-deployment
+  version:
+  tags: []
+  description:
+  entrypoint: test.py:dask_logging_test
+  parameters: {}
+  work_pool:
+    name: local-docker
+    work_queue_name:
+    job_variables: {}
+  schedule:
